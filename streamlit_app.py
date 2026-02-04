@@ -20,8 +20,8 @@ my_dataframe = (
     .table("smoothies.public.fruit_options")
     .select(col("FRUIT_NAME"),col('SEARCH_ON')
 )
-    sf_df = st.dataframe(data=smoothiefruit_response.json(), use_container_width=True)
-    st.stop()
+        sf_df = st.dataframe(data=smoothiefruit_response.json(), use_container_width=True)
+        st.stop()
 
 # Multiselect
 ingredients_list = st.multiselect(
