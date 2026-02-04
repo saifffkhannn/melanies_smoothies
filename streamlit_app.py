@@ -27,14 +27,6 @@ ingredients_list = st.multiselect(
     , my_dataframe
     , max_selections=5
 )
-# Process order
-if ingredients_list:
-    ingredients_string = ""
-    for fruit_chosen in ingredients_list:
-        ingredients_string += fruit_chosen + " "
-        st.subheader(fruit_chosen + 'Nutrition Information')
-        smoothiefruit_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+ fruit_chosen)
-        sf_df = st.dataframe(data=smoothiefruit_response.json(), use_container_width=True)
 
     st.write(ingredients_string)
     my_insert_stmt = f"""
@@ -46,6 +38,15 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
         st.success(f"Your Smoothie is ordered, {name_on_order}!", icon="✅")
    
+# Process order
+if ingredients_list:
+    ingredients_string = ""
+    for fruit_chosen in ingredients_list:
+        ingredients_string += fruit_chosen + " "
+        st.subheader(fruit_chosen + 'Nutrition Information')
+        smoothiefruit_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+ fruit_chosen)
+        sf_df = st.dataframe(data=smoothiefruit_response.json(), use_container_width=True)
+
 
     
 
